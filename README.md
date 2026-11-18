@@ -123,6 +123,21 @@ site, and fixing it before you submit is the difference between an entry and a w
 entry carries a run record a reviewer can replay. `--provider custom` is refused; name the provider
 your agent actually ran under.
 
+### The sixty-second checklist before you submit
+
+Run `check` once, then walk this list against its output:
+
+- [ ] `competition_open` is `pass`, not `skip`
+- [ ] `license_osi` is `pass`: the root `LICENSE` really carries `SPDX-License-Identifier: MIT`
+- [ ] `thinking_in_window` is `pass`: no message in the upload predates the opening
+- [ ] `thinking_revised` is `pass`: at least one file was written and then edited again
+- [ ] `guide_page` or its equivalent is `pass`: badges, About link and referral code are on the repo
+- [ ] `snapshot` is `pass`: the repository is committed and pushed, and the sha you submit is the one
+      you checked
+
+Anything that says `FAIL` will say `FAIL` on the site. `skip` is not a failure, but read the reason:
+a `skip` on a check that matters is usually a missing flag rather than a pass.
+
 ## How the money works
 
 - Prizes are paid in **USDC on Solana**, to the wallet that signed the entry.
@@ -141,6 +156,8 @@ your agent actually ran under.
 | Strict transcripts | `strict_transcripts: true` | record from the first line, and never compress the session |
 | Pasted code | a repo that was cloned or generated wholesale | write it in the session; graded per authored line |
 | Refused branding | badges, About or topic missing | the README needs the bounty's live badges, the About link and its topic |
+| License not declared | `license_osi` fails on a LICENSE that looks right | put `SPDX-License-Identifier: MIT` in the root LICENSE, not only the licence text |
+| Unnamed provider | `bundle` exits without writing a file | pass `--provider` with the provider the agent really ran under; `custom` is refused |
 | Wall clock | a graded run that times out and scores 0 | measure the worst case, not the average |
 
 ## Why bother with the transcripts being public
